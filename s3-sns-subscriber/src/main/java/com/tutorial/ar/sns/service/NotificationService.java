@@ -3,6 +3,8 @@ package com.tutorial.ar.sns.service;
 import com.amazonaws.services.sns.AmazonSNS;
 import com.amazonaws.services.sns.model.CreateTopicResult;
 import com.amazonaws.services.sns.model.SubscribeRequest;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.tutorial.ar.s3.service.ResourceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +27,9 @@ public class NotificationService {
     @Autowired
     private AmazonSNS amazonSNS;
 
+    @Autowired
+    private ResourceService resourceService;
+
     @EventListener(ContextRefreshedEvent.class)
     public void subscribeToTopic() {
 
@@ -37,5 +42,11 @@ public class NotificationService {
 
         amazonSNS.subscribe(subscribeRequest);
 
+    }
+
+    public void notifyChange(String bucket, String s3Object) {
+        String content = resourceService.getResource(bucket + "/" + s3Object, new TypeReference<String>() {
+        });
+        log.info("New content : {}", content);
     }
 }
