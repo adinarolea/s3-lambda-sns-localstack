@@ -26,6 +26,8 @@
         <spring.cloud.version>Greenwich.SR2</spring.cloud.version>
         <aws.lambda.events>2.2.7</aws.lambda.events>
         <aws.lambda.core>1.1.0</aws.lambda.core>
+        <localstack.test.version>0.2.1</localstack.test.version>
+
     </properties>
 
     <dependencies>
@@ -37,6 +39,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -66,6 +74,11 @@
                 <version>${aws.sdk.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>cloud.localstack</groupId>
+                <artifactId>localstack-utils</artifactId>
+                <version>${localstack.test.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
