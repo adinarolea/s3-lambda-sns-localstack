@@ -17,7 +17,7 @@ public class S3ChangeLambdaFunction implements RequestHandler<S3Event, String> {
             .standard()
             .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials("mock", "mock")))
             .withEndpointConfiguration(
-                    new AwsClientBuilder.EndpointConfiguration("http://localhost:14566", "us-east-1"))
+                    new AwsClientBuilder.EndpointConfiguration("http://localhost:4566", "us-east-1"))
             .build();
 
 

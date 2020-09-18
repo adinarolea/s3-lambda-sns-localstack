@@ -4,14 +4,16 @@ services:
     container_name: "localstack-dev"
     image: localstack/localstack:latest
     ports:
-      - "14566:14566"
+      - "4566-4599:4566-4599"
     environment:
-      - EDGE_PORT=14566
+      - DEBUG=1
+      - HOSTNAME=localhost
       - LAMBDA_REMOTE_DOCKER=false
       - SERVICES=s3,sns,lambda
       - LAMBDA_EXECUTOR=local
       - DOCKER_HOST=unix:///var/run/docker.sock
+      - HOST_TMP_FOLDER=${TMPDIR}
     network_mode: host
     volumes:
-      - "./data/localstack:/tmp/localstack"
+#      - "./data/localstack:/tmp/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
