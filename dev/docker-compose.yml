@@ -7,7 +7,7 @@ services:
       - "4566-4599:4566-4599"
     environment:
       - DEBUG=1
-      - HOSTNAME=localhost
+      - DEFAULT_REGION=us-east-1
       - LAMBDA_REMOTE_DOCKER=false
       - SERVICES=s3,sns,lambda
       - LAMBDA_EXECUTOR=local
@@ -15,5 +15,5 @@ services:
       - HOST_TMP_FOLDER=${TMPDIR}
     network_mode: host
     volumes:
-#      - "./data/localstack:/tmp/localstack"
+      - "./data/localstack:/tmp/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
